@@ -115,7 +115,7 @@ def main(file_path):
             hit = False
 
             for k in predictions:
-                if(k['probability']>=0.5 and k['tagName'] == 'gunshot'):        
+                if(k['probability']>=0.75 and k['tagName'] == 'gunshot'):        
                     hit = True
                     num_detected+=1
                     print(num_detected)
@@ -138,7 +138,7 @@ def main(file_path):
                 # elif(k['probability']>=0.5 and k['tagName'] == 'gunshot'):
                 #     print(k['probability'], " POSSIBLE SINGLE SHOT AT ",current_s)
 
-                if(k['probability']>=0.5 and k['tagName'] == 'multiple gunshots'):        
+                if(k['probability']>=0.75 and k['tagName'] == 'multiple gunshots'):        
                     hit = True
                     num_detected+=1
                     print(num_detected)
