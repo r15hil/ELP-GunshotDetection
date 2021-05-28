@@ -3,7 +3,7 @@
 ## Requirements
 Python:
 - pip install pydub
-- pip install numpy(maybe not because also installed with tensorflow)
+- pip install numpy (maybe not because also installed with tensorflow)
 - pip install pandas
 - pip install librosa
 - pip install matplotlib
