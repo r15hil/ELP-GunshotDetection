@@ -10,6 +10,8 @@ Python:
 - pip install Pillow
 - pip install opencv-python
 - pip install tensorflow
+- pip install ffmpeg
+- pip install ffprobe
 
 ## How to run
 
