@@ -3,11 +3,11 @@
 ## Requirements
 Python:
 - pip install pydub
-- pip install numpy
+- pip install numpy(maybe not because also installed with tensorflow)
 - pip install pandas
 - pip install librosa
 - pip install matplotlib
-- pip install Pillow
+- pip install Pillow (maybe not because also installed with matplotlib)
 - pip install opencv-python
 - pip install tensorflow
 - pip install ffmpeg
