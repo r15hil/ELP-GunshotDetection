@@ -10,3 +10,9 @@ Python:
 - pip install Pillow
 - pip install opencv-python
 - pip install tensorflow
+
+## How to run
+
+1. Make a folder called 'sounds' and put the soundfile you want to detect in there.
+2. Run the command 'python python/predict.py sounds'
+3. It will put detected gunshots inside cache/images/ with the bounding box
