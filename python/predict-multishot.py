@@ -114,7 +114,7 @@ def main(file_path):
             hit = False
 
             for k in predictions:
-                if(k['probability']>=0.70):        
+                if(k['probability']>=0.7 and k['tagName'] == 'gunshot'):        
                     hit = True
                     num_detected+=1
                     print(num_detected)
@@ -124,17 +124,38 @@ def main(file_path):
                     detected['offset'].append(current_s)
                     detected['confidence'].append(k['probability'])
 
-                    # image = cv2.imread(save_to)
-                    # top_left = (int(k['boundingBox']['left']*640),int(k['boundingBox']['top']*480))
-                    # bottom_right = (int((k['boundingBox']['left']+k['boundingBox']['width'])*640),int((k['boundingBox']['top']+k['boundingBox']['height'])*480)) 
-                    # print(top_left,bottom_right)
-                    # colour = (255,0,0)
-                    # thickness = 2
-                    # image = cv2.rectangle(image, bottom_right, top_left, colour,thickness)
-                    # cv2.imwrite(save_to, image)
+                    image = cv2.imread(save_to)
+                    top_left = (int(k['boundingBox']['left']*640),int(k['boundingBox']['top']*480))
+                    bottom_right = (int((k['boundingBox']['left']+k['boundingBox']['width'])*640),int((k['boundingBox']['top']+k['boundingBox']['height'])*480)) 
+                    print(top_left,bottom_right)
+                    colour = (255,0,0)
+                    thickness = 2
+                    image = cv2.rectangle(image, bottom_right, top_left, colour,thickness)
+                    cv2.imwrite(save_to, image)
                     
-                elif(k['probability']>=0.5):
-                    print(k['probability'], " POSSIBLE AT ",current_s)   
+                elif(k['probability']>=0.5 and k['tagName'] == 'gunshot'):
+                    print(k['probability'], " POSSIBLE SINGLE SHOT AT ",current_s)
+
+                elif(k['probability']>=0.7 and k['tagName'] == 'multiple gunshots'):        
+                    hit = True
+                    num_detected+=1
+                    print(num_detected)
+                    print("MULTIPLE GUNSHOTS:",current_s)
+                    print(k)
+                    detected['filename'].append(mylist[i])
+                    detected['offset'].append(current_s)
+                    detected['confidence'].append(k['probability'])
+
+                    image = cv2.imread(save_to)
+                    top_left = (int(k['boundingBox']['left']*640),int(k['boundingBox']['top']*480))
+                    bottom_right = (int((k['boundingBox']['left']+k['boundingBox']['width'])*640),int((k['boundingBox']['top']+k['boundingBox']['height'])*480)) 
+                    print(top_left,bottom_right)
+                    colour = (255,0,0)
+                    thickness = 2
+                    image = cv2.rectangle(image, bottom_right, top_left, colour,thickness)
+                    cv2.imwrite(save_to, image)
+                elif(k['probability']>=0.5 and k['tagName'] == 'multiple gunshots'): 
+                    print(k['probability'], " POSSIBLE MULTIPLE SHOTS AT ",current_s)
             if not hit:
                 os.remove(save_to)
 
