@@ -93,13 +93,9 @@ def main(file_path):
 
             save_to = 'cache/images/'+"detected_"+mylist[i]+"_"+str((current_s/1000))+'.png'
 
-            #start = time.time() 
-            #print(S_dB.shape)
             fig.savefig(save_to)
             plt.cla()
-            #plt.clf()
             plt.close(fig)
-            #print(time.time()-start)
 
             os.remove("cache/short.wav")
 
@@ -123,13 +119,14 @@ def main(file_path):
                     top_left = (int(k['boundingBox']['left']*640),int(k['boundingBox']['top']*480))
                     bottom_right = (int((k['boundingBox']['left']+k['boundingBox']['width'])*640),int((k['boundingBox']['top']+k['boundingBox']['height'])*480)) 
                     print(top_left,bottom_right)
-                    colour = (255,0,0)
+                    colour = (36,255,12)
                     thickness = 2
                     image = cv2.rectangle(image, bottom_right, top_left, colour,thickness)
+                    image = cv2.putText(image,k['tagName']+": "+str(round(k['probability'],2)),(int(k['boundingBox']['left']*640),int(k['boundingBox']['top']*480)-10),cv2.FONT_HERSHEY_SIMPLEX,0.4,(36,255,12),1)
                     cv2.imwrite(save_to, image)
                     
                 elif(k['probability']>=0.5):
-                    print(k['probability'], " POSSIBLE AT ",current_s)   
+                    print(k['probability'], " POSSIBLE AT ",current_s)    #save possible to json too
             if not hit:
                 os.remove(save_to)
 
