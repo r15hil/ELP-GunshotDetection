@@ -13,7 +13,7 @@ from matplotlib import figure
 import time
 import json
 import cv2
-import PIL
+import csv
 
 MODEL_FILENAME = 'saved_model.pb'
 LABELS_FILENAME = 'labels.txt'
@@ -137,6 +137,14 @@ def main(file_path):
 
     with open("detected.json","w") as store:
         json.dump(detected, store, indent=3)
+
+    # csv_columns = ['filename','offset','confidence']
+
+    # with open('detected.csv', 'w') as csvfile:
+    #     writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
+    #     writer.writeheader()
+    #     for data in detected:
+    #         writer.writerow(data)
 
 if __name__ == '__main__':
     if len(sys.argv) <= 1:
