@@ -69,7 +69,7 @@ def main(file_path):
 
         print("Took",int(end-start),"seconds to load file")
 
-        current_s = 0
+        current_s = 32400000
 
         for j in range(int(clip.duration_seconds/(overlap/1000))):
             fig = figure.Figure()
@@ -105,7 +105,7 @@ def main(file_path):
             hit = False
 
             for k in predictions:
-                if(k['probability']>=0.70):        
+                if(k['probability']>=0.40):        
                     hit = True
                     num_detected+=1
                     print(num_detected)
@@ -125,8 +125,8 @@ def main(file_path):
                     image = cv2.putText(image,k['tagName']+": "+str(round(k['probability'],2)),(int(k['boundingBox']['left']*640),int(k['boundingBox']['top']*480)-10),cv2.FONT_HERSHEY_SIMPLEX,0.4,(36,255,12),1)
                     cv2.imwrite(save_to, image)
                     
-                elif(k['probability']>=0.5):
-                    print(k['probability'], " POSSIBLE AT ",current_s)    #save possible to json too
+                # elif(k['probability']>=0.5):
+                #     print(k['probability'], " POSSIBLE AT ",current_s)    #save possible to json too
             if not hit:
                 os.remove(save_to)
 
